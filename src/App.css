@@ -17,7 +17,10 @@
   position: relative;
   z-index: 10;
   padding: 2rem;
+  padding-bottom: 5rem;
+  /* Space for forecast bar */
 }
+
 
 .forecast-container {
   display: flex;
@@ -116,27 +119,33 @@
     height: 210px;
   }
 
+  .main-content {
+    padding: 1rem;
+    padding-bottom: 8rem;
+    justify-content: flex-start;
+  }
+
   .forecast-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12rem;
+    padding-bottom: 1.5rem;
     justify-content: flex-start;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-
-  .forecast-container::-webkit-scrollbar,
-  .hourly-timeline-container::-webkit-scrollbar {
-    display: none;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
   }
 
   .hourly-timeline-container {
+    margin-top: 2rem;
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-  }
-
-  .main-content {
-    padding: 1rem;
+    padding-bottom: 0.5rem;
   }
 }

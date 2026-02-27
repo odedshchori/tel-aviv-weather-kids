@@ -29,8 +29,8 @@ export const HourlyTimeline: FC<HourlyTimelineProps> = ({ data }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        gap: '0.1rem',
-                        minWidth: '50px',
+                        gap: '0.4rem',
+                        minWidth: '60px',
                         padding: '0.4rem',
                     }}>
                         <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-dark)', opacity: 0.7 }}>
