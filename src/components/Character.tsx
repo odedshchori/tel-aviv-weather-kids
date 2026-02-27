@@ -2,14 +2,28 @@ import { useState, useEffect } from 'react';
 import type { FC } from 'react';
 import type { WeatherType } from './WeatherIcon';
 
+export type CharacterVariant = 'boy' | 'girl' | 'beanie' | 'ponytail';
+
 interface CharacterProps {
     weather: WeatherType;
     className?: string;
     animationKey?: number;
+    variant?: CharacterVariant;
 }
 
-export const Character: FC<CharacterProps> = ({ weather, className = '', animationKey = 0 }) => {
+export const Character: FC<CharacterProps> = ({ weather, className = '', animationKey = 0, variant = 'boy' }) => {
     const [isDancing, setIsDancing] = useState(false);
+
+    const getSkinColor = () => {
+        switch (variant) {
+            case 'boy': return '#FFCCBC';
+            case 'girl': return '#FFE0B2';
+            case 'beanie': return '#FFCCBC';
+            case 'ponytail': return '#ECA184';
+            default: return '#FFCCBC';
+        }
+    };
+    const skinColor = getSkinColor();
 
     useEffect(() => {
         if (animationKey > 0 && (weather === 'sunny' || weather === 'partly-cloudy')) {
@@ -25,13 +39,72 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                 {/* Basic Body Elements */}
                 {/* Head */}
                 <g className={`char-head ${isDancing ? 'dancing' : ''}`} key={`head-${animationKey}`}>
-                    <circle cx="100" cy="80" r="40" fill="#FFCCBC" />
-                    {/* Smiling Face - ALWAYS SMILING! */}
-                    <path d="M 85 85 Q 100 100 115 85" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
-                    <circle cx="85" cy="70" r="5" fill="#5D4037" />
-                    <circle cx="115" cy="70" r="5" fill="#5D4037" />
-                    {/* Hair */}
-                    <path d="M 60 70 Q 100 20 140 70 Z" fill="#795548" />
+                    {variant === 'boy' && (
+                        <>
+                            <circle cx="100" cy="80" r="40" fill="#FFCCBC" />
+                            <path d="M 85 85 Q 100 100 115 85" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
+                            <circle cx="85" cy="70" r="5" fill="#5D4037" />
+                            <circle cx="115" cy="70" r="5" fill="#5D4037" />
+                            <path d="M 60 70 Q 100 20 140 70 Z" fill="#795548" />
+                        </>
+                    )}
+                    {variant === 'girl' && (
+                        <>
+                            {/* Pigtails (rendered behind the face) */}
+                            <circle cx="65" cy="95" r="15" fill="#F57C00" />
+                            <circle cx="135" cy="95" r="15" fill="#F57C00" />
+
+                            <circle cx="100" cy="80" r="40" fill="#FFE0B2" />
+                            <path d="M 85 85 Q 100 95 115 85" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
+                            <circle cx="85" cy="70" r="5.5" fill="#5D4037" />
+                            <circle cx="115" cy="70" r="5.5" fill="#5D4037" />
+                            {/* Eyelashes */}
+                            <path d="M 80 65 L 75 60 M 85 62 L 82 55 M 120 65 L 125 60 M 115 62 L 118 55" stroke="#5D4037" strokeWidth="2" strokeLinecap="round" />
+
+                            {/* Hair top (rendered over face) */}
+                            <path d="M 65 75 Q 100 35 135 75 Z" fill="#F57C00" />
+                            {/* Bangs */}
+                            <path d="M 60 75 Q 100 50 140 75 Q 100 30 60 75 Z" fill="#E65100" opacity="0.5" />
+                        </>
+                    )}
+                    {variant === 'beanie' && (
+                        <>
+                            <circle cx="100" cy="80" r="40" fill="#FFCCBC" />
+                            {/* Freckles */}
+                            <circle cx="80" cy="80" r="1.5" fill="#D84315" />
+                            <circle cx="88" cy="78" r="1.5" fill="#D84315" />
+                            <circle cx="112" cy="78" r="1.5" fill="#D84315" />
+                            <circle cx="120" cy="80" r="1.5" fill="#D84315" />
+                            <path d="M 85 87 Q 100 102 115 87" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
+                            <circle cx="85" cy="72" r="5" fill="#5D4037" />
+                            <circle cx="115" cy="72" r="5" fill="#5D4037" />
+                            {/* Beanie Hat */}
+                            <path d="M 60 70 C 60 30, 140 30, 140 70 Z" fill="#D81B60" />
+                            <rect x="58" y="65" width="84" height="15" rx="5" fill="#C2185B" />
+                            <circle cx="100" cy="40" r="12" fill="#F48FB1" />
+                        </>
+                    )}
+                    {variant === 'ponytail' && (
+                        <>
+                            {/* Ponytail Hair Tail (rendered behind) */}
+                            <path d="M 65 75 C 50 110, 80 120, 75 130" stroke="#3E2723" strokeWidth="15" strokeLinecap="round" fill="none" />
+
+                            <circle cx="100" cy="80" r="40" fill="#ECA184" />
+                            <path d="M 85 85 Q 100 100 115 85" stroke="#4E342E" strokeWidth="3" fill="none" strokeLinecap="round" />
+                            <circle cx="85" cy="70" r="5" fill="#4E342E" />
+                            <circle cx="115" cy="70" r="5" fill="#4E342E" />
+
+                            {/* Hair Top */}
+                            <path d="M 65 75 Q 100 20 135 75 Z" fill="#3E2723" />
+                            {/* Bangs */}
+                            <path d="M 65 75 Q 100 60 135 75 Q 100 30 65 75 Z" fill="#2E1713" opacity="0.5" />
+
+                            {/* Bow */}
+                            <path d="M 55 70 L 65 60 L 75 70 Z" fill="#00BCD4" />
+                            <path d="M 75 70 L 65 80 L 55 70 Z" fill="#00BCD4" />
+                            <circle cx="65" cy="70" r="4" fill="#0097A7" />
+                        </>
+                    )}
                 </g>
 
                 {/* Body group for vertical groove */}
@@ -48,8 +121,8 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                             {/* Shorts */}
                             <path d="M 65 180 L 135 180 L 135 220 L 105 220 L 100 200 L 95 220 L 65 220 Z" fill="#03A9F4" />
                             {/* Legs */}
-                            <rect x="75" y="220" width="15" height="40" fill="#FFCCBC" />
-                            <rect x="110" y="220" width="15" height="40" fill="#FFCCBC" />
+                            <rect x="75" y="220" width="15" height="40" fill={skinColor} />
+                            <rect x="110" y="220" width="15" height="40" fill={skinColor} />
                             {/* Sneakers */}
                             <rect x="65" y="250" width="25" height="15" rx="6" fill="#009688" />
                             <rect x="110" y="250" width="25" height="15" rx="6" fill="#009688" />
@@ -129,20 +202,20 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                     <rect x="50" y="125" width="20" height="60" rx="10"
                         className={`char-arm-left ${isDancing ? 'dancing' : ''}`}
                         key={`arm-left-${animationKey}`}
-                        fill={weather === 'rainy' ? '#FFCA28' : weather === 'cloudy' ? '#8BC34A' : weather === 'partly-cloudy' ? '#81D4FA' : '#FFCCBC'}
+                        fill={weather === 'rainy' ? '#FFCA28' : weather === 'cloudy' ? '#8BC34A' : weather === 'partly-cloudy' ? '#81D4FA' : skinColor}
                     />
                     {/* Right Arm */}
                     <rect x="130" y="125" width="20" height="60" rx="10"
                         className={`char-arm-right ${isDancing ? 'dancing' : ''}`}
                         key={`arm-right-${animationKey}`}
-                        fill={weather === 'rainy' ? '#FFCA28' : weather === 'cloudy' ? '#8BC34A' : weather === 'partly-cloudy' ? '#81D4FA' : '#FFCCBC'}
+                        fill={weather === 'rainy' ? '#FFCA28' : weather === 'cloudy' ? '#8BC34A' : weather === 'partly-cloudy' ? '#81D4FA' : skinColor}
                     />
 
                     {/* Hands / Cuffs */}
                     {weather !== 'sunny' && weather !== 'partly-cloudy' && (
                         <>
-                            <circle cx="45" cy="180" r="8" fill="#FFCCBC" />
-                            <circle cx="155" cy="180" r="8" fill="#FFCCBC" />
+                            <circle cx="45" cy="180" r="8" fill={skinColor} />
+                            <circle cx="155" cy="180" r="8" fill={skinColor} />
                         </>
                     )}
                 </g>

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { Character } from './Character';
+import { Character, type CharacterVariant } from './Character';
 import type { WeatherType } from './WeatherIcon';
-import { WeatherIcon } from './WeatherIcon';
+import { Background } from './Background';
 
 interface CharacterShowcaseProps {
     onBack: () => void;
@@ -56,61 +56,79 @@ export const CharacterShowcase: FC<CharacterShowcaseProps> = ({ onBack }) => {
                 </div>
             </div>
 
-            {/* Characters Grid */}
+            {/* Characters Section */}
+            <h2 style={{ color: '#fff', fontSize: '1.5rem', alignSelf: 'flex-start', marginLeft: '10%' }}>Character Variants</h2>
             <div style={{
-                display: 'flex',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '2.5rem',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
+                width: '100%',
+                maxWidth: '1100px',
+                marginBottom: '4rem'
+            }}>
+                {(['boy', 'girl', 'beanie', 'ponytail'] as CharacterVariant[]).map(variant =>
+                    weatherStates.map(({ type, label, emoji }) => (
+                        <div key={`${variant}-${type}`} style={{
+                            background: 'rgba(255,255,255,0.07)',
+                            border: '1px solid rgba(255,255,255,0.15)',
+                            borderRadius: '20px',
+                            padding: '2rem 1.5rem 1.5rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '1rem',
+                            backdropFilter: 'blur(8px)',
+                        }}>
+                            <div style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem' }}>
+                                {emoji} {label}
+                            </div>
+
+                            <div style={{ overflow: 'visible', paddingTop: '40px' }}>
+                                <Character weather={type} variant={variant} />
+                            </div>
+
+                            <code style={{ background: 'rgba(0,0,0,0.4)', color: '#79c0ff', padding: '0.3rem 0.8rem', borderRadius: '8px', fontSize: '0.8rem' }}>
+                                {variant} - {type}
+                            </code>
+                        </div>
+                    ))
+                )}
+            </div>
+
+            {/* Backgrounds Section */}
+            <h2 style={{ color: '#fff', fontSize: '1.5rem', alignSelf: 'flex-start', marginLeft: '10%' }}>Backgrounds</h2>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                gap: '2.5rem',
                 width: '100%',
                 maxWidth: '1100px',
             }}>
                 {weatherStates.map(({ type, label, emoji }) => (
-                    <div key={type} style={{
-                        background: 'rgba(255,255,255,0.07)',
-                        border: '1px solid rgba(255,255,255,0.15)',
+                    <div key={`bg-${type}`} style={{
+                        position: 'relative',
+                        height: '300px',
                         borderRadius: '20px',
-                        padding: '2rem 1.5rem 1.5rem',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        backdropFilter: 'blur(8px)',
-                        minWidth: '220px',
+                        overflow: 'hidden',
+                        border: '1px solid rgba(255,255,255,0.3)',
+                        // Using the CSS variable matching what we added to App.css
+                        background: `var(--color-sky-${type === 'sunny' || type === 'partly-cloudy' ? 'clear' : type})`
                     }}>
-                        {/* Label */}
-                        <div style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem' }}>
+                        <Background weather={type} />
+                        <div style={{
+                            position: 'absolute',
+                            top: 10,
+                            right: 10,
+                            padding: '0.5rem 1rem',
+                            background: 'rgba(0,0,0,0.5)',
+                            color: '#fff',
+                            borderRadius: '10px',
+                            backdropFilter: 'blur(4px)',
+                            fontWeight: 700,
+                            zIndex: 10
+                        }}>
                             {emoji} {label}
                         </div>
-
-                        {/* Character */}
-                        <div style={{ overflow: 'visible', paddingTop: '40px' }}>
-                            <Character weather={type} />
-                        </div>
-
-                        {/* Weather icon */}
-                        <div style={{
-                            background: 'rgba(255,255,255,0.15)',
-                            borderRadius: '12px',
-                            padding: '0.6rem 1rem',
-                            display: 'flex',
-                            gap: '0.5rem',
-                            alignItems: 'center',
-                        }}>
-                            <WeatherIcon type={type} size={36} animate={false} />
-                            <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>icon</span>
-                        </div>
-
-                        {/* State name badge */}
-                        <code style={{
-                            background: 'rgba(0,0,0,0.4)',
-                            color: '#79c0ff',
-                            padding: '0.3rem 0.8rem',
-                            borderRadius: '8px',
-                            fontSize: '0.8rem',
-                        }}>
-                            {type}
-                        </code>
                     </div>
                 ))}
             </div>

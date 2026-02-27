@@ -35,6 +35,8 @@
 }
 
 /* Background classes controlled by React state */
+.bg-sky-sunny,
+.bg-sky-partly-cloudy,
 .bg-sky-clear {
   background-color: var(--color-sky-clear);
 }

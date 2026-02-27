@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { WeatherIcon, type WeatherType } from './components/WeatherIcon';
-import { Character } from './components/Character';
+import { Character, type CharacterVariant } from './components/Character';
 import { ForecastCard, type DailyForecast } from './components/ForecastCard';
 import { Background } from './components/Background';
 import { CharacterShowcase } from './components/CharacterShowcase';
@@ -90,6 +90,10 @@ function App() {
   const selectedDay = forecastData.find(d => d.id === selectedDayId) || forecastData[0];
   const { weather, temp, day } = selectedDay;
 
+  const variants: CharacterVariant[] = ['boy', 'girl', 'beanie', 'ponytail'];
+  const selectedIndex = forecastData.findIndex(d => d.id === selectedDayId);
+  const variant = variants[Math.max(0, selectedIndex) % variants.length];
+
   // Derive background class from weather
   const bgClass = `bg-sky-${weather}`;
 
@@ -103,7 +107,7 @@ function App() {
 
   return (
     <div className={`app-container ${bgClass}`} dir="rtl">
-      <Background />
+      <Background weather={weather} />
 
       {/* DEV button — temp shortcut to character showcase */}
       <button
@@ -152,7 +156,7 @@ function App() {
 
 
           <div>
-            <Character weather={weather} animationKey={animationKey} />
+            <Character weather={weather} animationKey={animationKey} variant={variant} />
           </div>
 
         </div>
