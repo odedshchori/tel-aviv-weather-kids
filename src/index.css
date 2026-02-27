@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+
+:root {
+  /* Vibrant Color Palette for Kids */
+  --color-sky-clear: #4FC3F7;
+  --color-sky-cloudy: #90A4AE;
+  --color-sky-rainy: #546E7A;
+
+  --color-sun: #FFEB3B;
+  --color-sun-glow: rgba(255, 235, 59, 0.6);
+  --color-cloud: #FFFFFF;
+  --color-cloud-shadow: #E0E0E0;
+  --color-rain: #29B6F6;
+
+  --color-text-light: #FFFFFF;
+  --color-text-dark: #37474F;
+
+  --color-card-bg: rgba(255, 255, 255, 0.8);
+  --color-card-active: rgba(255, 255, 255, 1);
+  --color-card-hover: rgba(255, 255, 255, 0.95);
+
+  --border-radius-lg: 24px;
+  --border-radius-md: 16px;
+  --border-radius-sm: 8px;
+
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 20px var(--color-sun-glow);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-sky-clear);
+  color: var(--color-text-dark);
+  overflow: hidden;
+  /* Prevent scrolling, app is full screen */
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 0.8s ease-in-out;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography elements */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes drift-reverse {
+  0% {
+    transform: translateX(100vw);
+  }
+
+  100% {
+    transform: translateX(-20vw);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+@keyframes groove-head {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes groove-arm-left {
+
+  0%,
+  100% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes groove-arm-right {
+
+  0%,
+  100% {
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes groove-body {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Character part base states & animations */
+.char-head {
+  transform-origin: 100px 80px;
+  transform-box: view-box;
+}
+
+.char-head.dancing {
+  animation: groove-head 0.5s ease-in-out 2;
+}
+
+.char-arm-left {
+  transform-origin: 60px 125px;
+  transform-box: view-box;
+  transform: rotate(15deg);
+}
+
+.char-arm-left.dancing {
+  animation: groove-arm-left 0.5s ease-in-out 2;
+}
+
+.char-arm-right {
+  transform-origin: 140px 125px;
+  transform-box: view-box;
+  transform: rotate(-15deg);
+}
+
+.char-arm-right.dancing {
+  animation: groove-arm-right 0.5s ease-in-out 2;
+}
+
+.char-body {
+  transform-box: view-box;
+}
+
+.char-body.dancing {
+  animation: groove-body 0.5s ease-in-out 2;
+}
+
+/* Utility animation classes */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
