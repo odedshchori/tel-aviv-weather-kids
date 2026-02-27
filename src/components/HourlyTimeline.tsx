@@ -15,15 +15,7 @@ export const HourlyTimeline: FC<HourlyTimelineProps> = ({ data }) => {
     if (!data || data.length === 0) return null;
 
     return (
-        <div style={{
-            width: '100%',
-            maxWidth: '1000px',
-            padding: '1rem 0.5rem',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '0.5rem',
-        }}>
+        <div className="hourly-timeline-container">
 
             {data.map((hour) => {
                 const timeStr = new Date(hour.time).toLocaleTimeString('he-IL', {

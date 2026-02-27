@@ -20,7 +20,7 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
     }, [animationKey, weather]);
 
     return (
-        <div className={`character-wrapper ${className}`} style={{ position: 'relative', width: '200px', height: '300px' }}>
+        <div className={`character-wrapper ${className}`}>
             <svg viewBox="0 -30 200 330" width="100%" height="100%" overflow="visible">
                 {/* Basic Body Elements */}
                 {/* Head */}

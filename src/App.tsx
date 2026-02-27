@@ -129,7 +129,7 @@ function App() {
       <main className="main-content">
         {/* Header Section */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '3rem', color: 'var(--color-text-dark)', textShadow: '0 2px 4px rgba(255,255,255,0.7)', marginBottom: '0.2rem' }}>
+          <h1 className="title-display" style={{ color: 'var(--color-text-dark)', textShadow: '0 2px 4px rgba(255,255,255,0.7)', marginBottom: '0.2rem' }}>
             תל אביב
           </h1>
           <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', fontWeight: 700, opacity: 0.7, fontSize: '1.1rem' }}>
@@ -141,11 +141,11 @@ function App() {
         </div>
 
         {/* Big Weather Display & Character Container */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3rem', width: '100%', maxWidth: '800px' }}>
+        <div className="hero-container">
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <WeatherIcon type={weather} size={150} animate={true} />
-            <div style={{ fontSize: '7rem', fontWeight: 900, color: 'var(--color-text-dark)', textShadow: '0 4px 8px rgba(255,255,255,0.5)', lineHeight: 0.9 }}>
+            <div className="hero-temp-display">
               {displayTemp}°
             </div>
           </div>
@@ -173,7 +173,7 @@ function App() {
 
 
       {/* Bottom Forecast Slider/Cards */}
-      <div className="forecast-container" style={{ gap: '1.25rem', paddingBottom: '2.5rem' }}>
+      <div className="forecast-container">
         {forecastData.map((data) => (
           <ForecastCard
             key={data.id}
