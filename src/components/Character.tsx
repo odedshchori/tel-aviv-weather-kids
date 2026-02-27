@@ -55,54 +55,62 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                             <circle cx="135" cy="95" r="15" fill="#F57C00" />
 
                             <circle cx="100" cy="80" r="40" fill="#FFE0B2" />
+
+                            {/* Hair top (rendered over face but behind eyes) */}
+                            <path d="M 65 68 Q 100 28 135 68 Z" fill="#F57C00" />
+                            {/* Bangs */}
+                            <path d="M 60 68 Q 100 43 140 68 Q 100 23 60 68 Z" fill="#E65100" opacity="0.5" />
+
+                            {/* Facial Features (rendered on top) */}
                             <path d="M 85 85 Q 100 95 115 85" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
                             <circle cx="85" cy="70" r="5.5" fill="#5D4037" />
                             <circle cx="115" cy="70" r="5.5" fill="#5D4037" />
                             {/* Eyelashes */}
                             <path d="M 80 65 L 75 60 M 85 62 L 82 55 M 120 65 L 125 60 M 115 62 L 118 55" stroke="#5D4037" strokeWidth="2" strokeLinecap="round" />
-
-                            {/* Hair top (rendered over face) */}
-                            <path d="M 65 75 Q 100 35 135 75 Z" fill="#F57C00" />
-                            {/* Bangs */}
-                            <path d="M 60 75 Q 100 50 140 75 Q 100 30 60 75 Z" fill="#E65100" opacity="0.5" />
                         </>
                     )}
                     {variant === 'beanie' && (
                         <>
                             <circle cx="100" cy="80" r="40" fill="#FFCCBC" />
+
+                            {/* Beanie Hat */}
+                            <path d="M 60 65 C 60 25, 140 25, 140 65 Z" fill="#D81B60" />
+                            <rect x="58" y="60" width="84" height="15" rx="5" fill="#C2185B" />
+                            <circle cx="100" cy="35" r="12" fill="#F48FB1" />
+
                             {/* Freckles */}
                             <circle cx="80" cy="80" r="1.5" fill="#D84315" />
                             <circle cx="88" cy="78" r="1.5" fill="#D84315" />
                             <circle cx="112" cy="78" r="1.5" fill="#D84315" />
                             <circle cx="120" cy="80" r="1.5" fill="#D84315" />
+
+                            {/* Face */}
                             <path d="M 85 87 Q 100 102 115 87" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
                             <circle cx="85" cy="72" r="5" fill="#5D4037" />
                             <circle cx="115" cy="72" r="5" fill="#5D4037" />
-                            {/* Beanie Hat */}
-                            <path d="M 60 70 C 60 30, 140 30, 140 70 Z" fill="#D81B60" />
-                            <rect x="58" y="65" width="84" height="15" rx="5" fill="#C2185B" />
-                            <circle cx="100" cy="40" r="12" fill="#F48FB1" />
                         </>
                     )}
                     {variant === 'ponytail' && (
                         <>
                             {/* Ponytail Hair Tail (rendered behind) */}
-                            <path d="M 65 75 C 50 110, 80 120, 75 130" stroke="#3E2723" strokeWidth="15" strokeLinecap="round" fill="none" />
+                            <path d="M 65 65 C 50 100, 80 110, 75 120" stroke="#3E2723" strokeWidth="15" strokeLinecap="round" fill="none" />
 
                             <circle cx="100" cy="80" r="40" fill="#ECA184" />
+
+                            {/* Hair Top */}
+                            <path d="M 65 65 Q 100 10 135 65 Z" fill="#3E2723" />
+                            {/* Bangs */}
+                            <path d="M 65 65 Q 100 50 135 65 Q 100 20 65 65 Z" fill="#2E1713" opacity="0.5" />
+
+                            {/* Bow */}
+                            <path d="M 55 60 L 65 50 L 75 60 Z" fill="#00BCD4" />
+                            <path d="M 75 60 L 65 70 L 55 60 Z" fill="#00BCD4" />
+                            <circle cx="65" cy="60" r="4" fill="#0097A7" />
+
+                            {/* Facial features */}
                             <path d="M 85 85 Q 100 100 115 85" stroke="#4E342E" strokeWidth="3" fill="none" strokeLinecap="round" />
                             <circle cx="85" cy="70" r="5" fill="#4E342E" />
                             <circle cx="115" cy="70" r="5" fill="#4E342E" />
-
-                            {/* Hair Top */}
-                            <path d="M 65 75 Q 100 20 135 75 Z" fill="#3E2723" />
-                            {/* Bangs */}
-                            <path d="M 65 75 Q 100 60 135 75 Q 100 30 65 75 Z" fill="#2E1713" opacity="0.5" />
-
-                            {/* Bow */}
-                            <path d="M 55 70 L 65 60 L 75 70 Z" fill="#00BCD4" />
-                            <path d="M 75 70 L 65 80 L 55 70 Z" fill="#00BCD4" />
-                            <circle cx="65" cy="70" r="4" fill="#0097A7" />
                         </>
                     )}
                 </g>
