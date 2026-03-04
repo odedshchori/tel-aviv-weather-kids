@@ -125,7 +125,7 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
         <div className={`character-wrapper ${className}`}>
             <svg viewBox="0 -30 200 330" width="100%" height="100%" overflow="visible">
                 <g className={`char-head ${isDancing ? 'dancing' : ''}`} key={`head-${animationKey}`}>
-                    {variant === 'boy' && (
+                    {(variant as string) === 'boy' && (
                         <>
                             <circle cx="100" cy="80" r="40" fill="#FFCCBC" />
                             <path d="M 85 85 Q 100 100 115 85" stroke="#5D4037" strokeWidth="3" fill="none" strokeLinecap="round" />
