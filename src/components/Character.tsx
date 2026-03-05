@@ -5,6 +5,21 @@ import boySunnyImg from '../assets/boy_sunny.png';
 import boyRainyImg from '../assets/boy_rainy.png';
 import boyCloudyImg from '../assets/boy_cloudy.png';
 import boyPartlyCloudyImg from '../assets/boy_partly_cloudy.png';
+import ponytailSunnyImg from '../assets/ponytail_sunny.png';
+import ponytailRainyImg from '../assets/ponytail_rainy.png';
+import ponytailCloudyImg from '../assets/ponytail_cloudy.png';
+import ponytailPartlyCloudyImg from '../assets/ponytail_partly_cloudy.png';
+import beanieSunnyImg from '../assets/beanie_sunny.png';
+import beanieRainyImg from '../assets/beanie_rainy.png';
+import beanieCloudyImg from '../assets/beanie_cloudy.png';
+import beaniePartlyCloudyImg from '../assets/beanie_partly_cloudy.png';
+import girlSunnyImg from '../assets/girl_sunny.png';
+import girlRainyImg from '../assets/girl_rainy.png';
+import girlCloudyImg from '../assets/girl_cloudy.png';
+import girlPartlyCloudyImg from '../assets/girl_partly_cloudy.png';
+
+
+
 
 export type CharacterVariant = 'boy' | 'girl' | 'beanie' | 'ponytail';
 
@@ -20,16 +35,43 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
     const [processedImg, setProcessedImg] = useState<string | null>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    const isRealistic = variant === 'boy';
+    const isRealistic = variant === 'boy' || variant === 'ponytail' || variant === 'beanie' || variant === 'girl';
 
     const getRealisticImg = () => {
-        switch (weather) {
-            case 'sunny': return boySunnyImg;
-            case 'rainy': return boyRainyImg;
-            case 'cloudy': return boyCloudyImg;
-            case 'partly-cloudy': return boyPartlyCloudyImg;
-            default: return boySunnyImg;
+        if (variant === 'boy') {
+            switch (weather) {
+                case 'sunny': return boySunnyImg;
+                case 'rainy': return boyRainyImg;
+                case 'cloudy': return boyCloudyImg;
+                case 'partly-cloudy': return boyPartlyCloudyImg;
+                default: return boySunnyImg;
+            }
+        } else if (variant === 'ponytail') {
+            switch (weather) {
+                case 'sunny': return ponytailSunnyImg;
+                case 'rainy': return ponytailRainyImg;
+                case 'cloudy': return ponytailCloudyImg;
+                case 'partly-cloudy': return ponytailPartlyCloudyImg;
+                default: return ponytailSunnyImg;
+            }
+        } else if (variant === 'beanie') {
+            switch (weather) {
+                case 'sunny': return beanieSunnyImg;
+                case 'rainy': return beanieRainyImg;
+                case 'cloudy': return beanieCloudyImg;
+                case 'partly-cloudy': return beaniePartlyCloudyImg;
+                default: return beanieSunnyImg;
+            }
+        } else if (variant === 'girl') {
+            switch (weather) {
+                case 'sunny': return girlSunnyImg;
+                case 'rainy': return girlRainyImg;
+                case 'cloudy': return girlCloudyImg;
+                case 'partly-cloudy': return girlPartlyCloudyImg;
+                default: return girlSunnyImg;
+            }
         }
+        return boySunnyImg;
     };
 
     // Background removal logic using Canvas
@@ -111,8 +153,8 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                 {processedImg ? (
                     <img
                         src={processedImg}
-                        alt="Realistic Boy"
-                        className={`realistic-character ${weather}-realistic`}
+                        alt={variant === 'boy' ? "Realistic Boy" : variant === 'ponytail' ? "Realistic Ponytail" : variant === 'beanie' ? "Realistic Beanie" : "Realistic Girl"}
+                        className={`realistic-character ${weather}-realistic ${variant}-realistic`}
                     />
                 ) : (
                     <div className="loading-character">טוען דמות...</div>
@@ -134,7 +176,7 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                             <path d="M 60 70 Q 100 20 140 70 Z" fill="#795548" />
                         </>
                     )}
-                    {variant === 'girl' && (
+                    {(variant as string) === 'girl' && (
                         <>
                             <circle cx="65" cy="95" r="15" fill="#F57C00" />
                             <circle cx="135" cy="95" r="15" fill="#F57C00" />
@@ -147,7 +189,7 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                             <path d="M 80 65 L 75 60 M 85 62 L 82 55 M 120 65 L 125 60 M 115 62 L 118 55" stroke="#5D4037" strokeWidth="2" strokeLinecap="round" />
                         </>
                     )}
-                    {variant === 'beanie' && (
+                    {(variant as string) === 'beanie' && (
                         <>
                             <circle cx="100" cy="80" r="40" fill="#FFCCBC" />
                             <path d="M 60 65 C 60 25, 140 25, 140 65 Z" fill="#D81B60" />
@@ -162,7 +204,7 @@ export const Character: FC<CharacterProps> = ({ weather, className = '', animati
                             <circle cx="115" cy="72" r="5" fill="#5D4037" />
                         </>
                     )}
-                    {variant === 'ponytail' && (
+                    {(variant as string) === 'ponytail' && (
                         <>
                             <path d="M 65 65 C 50 100, 80 110, 75 120" stroke="#3E2723" strokeWidth="15" strokeLinecap="round" fill="none" />
                             <circle cx="100" cy="80" r="40" fill="#ECA184" />
