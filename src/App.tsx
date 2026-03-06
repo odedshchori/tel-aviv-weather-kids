@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import { WeatherIcon, type WeatherType } from './components/WeatherIcon';
 import { Character, type CharacterVariant } from './components/Character';
@@ -90,7 +90,11 @@ function App() {
   const selectedDay = forecastData.find(d => d.id === selectedDayId) || forecastData[0];
   const { weather, temp, day } = selectedDay;
 
-  const variants: CharacterVariant[] = ['boy', 'girl', 'beanie', 'ponytail'];
+  const variants = useMemo(() => {
+    const list: CharacterVariant[] = ['boy', 'girl', 'beanie', 'ponytail'];
+    return [...list].sort(() => Math.random() - 0.5);
+  }, []);
+
   const selectedIndex = forecastData.findIndex(d => d.id === selectedDayId);
   const variant = variants[Math.max(0, selectedIndex) % variants.length];
 
