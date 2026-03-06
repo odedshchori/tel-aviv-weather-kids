@@ -20,7 +20,7 @@ function App() {
   const [animationKey, setAnimationKey] = useState(0);
 
   const variants = useMemo(() => {
-    const list: CharacterVariant[] = ['boy', 'girl', 'beanie', 'ponytail'];
+    const list: CharacterVariant[] = ['elephant', 'giraffe', 'meerkat', 'flamingo'];
     const shuffled = [...list].sort(() => Math.random() - 0.5);
     return shuffled;
   }, []);

@@ -66,7 +66,7 @@ export const CharacterShowcase: FC<CharacterShowcaseProps> = ({ onBack }) => {
                 maxWidth: '1100px',
                 marginBottom: '4rem'
             }}>
-                {(['boy', 'girl', 'beanie', 'ponytail'] as CharacterVariant[]).map(variant =>
+                {(['elephant', 'giraffe', 'meerkat', 'flamingo'] as CharacterVariant[]).map(variant =>
                     weatherStates.map(({ type, label, emoji }) => (
                         <div key={`${variant}-${type}`} style={{
                             background: 'rgba(255,255,255,0.07)',
