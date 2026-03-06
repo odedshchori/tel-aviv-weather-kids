@@ -8,49 +8,120 @@ interface BackgroundProps {
 export const Background: FC<BackgroundProps> = ({ weather }) => {
     const isBeach = weather === 'sunny' || weather === 'partly-cloudy';
 
+    // Color Palette based on weather
+    const cityColor = weather === 'rainy' ? '#37474F' : '#607D8B';
+    const cityColorLight = weather === 'rainy' ? '#546E7A' : '#90A4AE';
+
     return (
         <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100vw', height: '100%', overflow: 'hidden', zIndex: 0, pointerEvents: 'none' }}>
+
+            {/* SVG DEFINITIONS (Filters for Softness) */}
+            <svg width="0" height="0" style={{ position: 'absolute' }}>
+                <defs>
+                    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+                    </filter>
+                    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#FFFFFF', stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: '#F5F5F5', stopOpacity: 0.8 }} />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            {/* 1. FAR HORIZON SKYLINE (Subtle Azrieli) */}
+            <div style={{ position: 'absolute', bottom: '150px', width: '100%', height: '200px', opacity: 0.2 }}>
+                <svg width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                    <rect x="800" y="40" width="20" height="160" rx="10" fill={cityColor} />
+                    <rect x="830" y="20" width="25" height="180" fill={cityColor} />
+                    <path d="M 865 200 L 895 200 L 880 50 Z" fill={cityColor} />
+                </svg>
+            </div>
+
             {isBeach ? (
-                <>
-                    {/* Tel Aviv Beach / Sea Line */}
-                    <div className="waves-container" style={{ position: 'absolute', bottom: '0', width: '100%', height: '300px' }}>
-                        <svg width="200%" height="200px" style={{ position: 'absolute', bottom: '60px', left: '-50%' }} preserveAspectRatio="none" className="animate-drift">
-                            <path d="M 0 100 Q 150 50 300 100 T 600 100 T 900 100 T 1200 100 T 1500 100 T 1800 100 T 2100 100 V 300 H 0 Z" fill="#0277BD" opacity="0.4" />
-                            <path d="M 0 130 Q 150 170 300 130 T 600 130 T 900 130 T 1200 130 T 1500 130 T 1800 130 T 2100 130 V 300 H 0 Z" fill="#01579B" opacity="0.6" />
-                        </svg>
-                        <svg width="200%" height="200px" style={{ position: 'absolute', bottom: '40px', left: '0' }} preserveAspectRatio="none" className="animate-drift-reverse">
-                            <path d="M 0 110 Q 150 150 300 110 T 600 110 T 900 110 T 1200 110 T 1500 110 T 1800 110 T 2100 110 V 300 H 0 Z" fill="#0288D1" opacity="0.5" />
-                        </svg>
-
-                        {/* Beach Sand */}
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '70px', backgroundColor: '#FFE082', borderTopLeftRadius: '50% 10px', borderTopRightRadius: '50% 15px' }} />
+                /* SUNNY / PARTLY CLOUDY - Beach World */
+                <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '100%' }}>
+                    {/* Sea Layer */}
+                    <div style={{ position: 'absolute', bottom: '100px', width: '100%', height: '150px', backgroundColor: '#0288D1' }}>
+                        <div style={{ position: 'absolute', top: 0, width: '100%', height: '15px', backgroundColor: 'rgba(255,255,255,0.15)' }} />
                     </div>
-                </>
+
+                    {/* Jaffa Old City Silhouette */}
+                    <svg width="350" height="120" viewBox="0 0 350 120" style={{ position: 'absolute', bottom: '100px', right: '0', opacity: 0.7 }}>
+                        <path d="M 0 120 L 100 120 L 100 80 L 150 80 L 150 50 L 180 50 L 180 30 L 200 30 L 200 120 Z" fill="#8D6E63" />
+                        <rect x="185" y="10" width="8" height="25" fill="#8D6E63" />
+                        <circle cx="189" cy="8" r="4" fill="#D32F2F" />
+                    </svg>
+
+                    {/* Sand Layer */}
+                    <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '120px', backgroundColor: '#FFE082' }}>
+                        <div style={{ position: 'absolute', top: '-20px', width: '100%', height: '40px', backgroundColor: '#FFE082', borderRadius: '50%' }} />
+                    </div>
+
+                    {/* Icon Element: Palm Tree */}
+                    <svg width="200" height="250" style={{ position: 'absolute', bottom: '20px', left: '10%' }}>
+                        <path d="M 50 250 Q 30 150 50 50" stroke="#5D4037" strokeWidth="12" fill="none" strokeLinecap="round" />
+                        <g fill="#4CAF50">
+                            <ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(-30 50 50)" />
+                            <ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(30 50 50)" />
+                            <ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(90 50 50)" />
+                        </g>
+                    </svg>
+                </div>
             ) : (
-                <>
-                    {/* Urban Silhouette for Cloudy / Rainy */}
-                    <div style={{ position: 'absolute', bottom: '0', width: '100%', height: '300px' }}>
-                        <svg width="100%" height="200px" style={{ position: 'absolute', bottom: '0', left: '0' }} preserveAspectRatio="none">
-                            {/* Layer 1 - Background Buildings */}
-                            <path d="M 0 200 L 0 50 L 20 50 L 20 80 L 50 80 L 50 60 L 80 60 L 80 120 L 120 120 L 120 30 L 150 30 L 150 90 L 180 90 L 180 110 L 220 110 L 220 70 L 250 70 L 250 100 L 300 100 L 300 40 L 340 40 L 340 120 L 400 120 L 400 60 L 450 60 L 450 90 L 500 90 L 500 200 Z" fill={weather === 'rainy' ? '#37474F' : '#607D8B'} opacity="0.5" />
-                            {/* Layer 2 - Foreground Buildings */}
-                            <path d="M -10 200 L -10 100 L 30 100 L 30 130 L 60 130 L 60 90 L 100 90 L 100 140 L 140 140 L 140 80 L 180 80 L 180 150 L 220 150 L 220 100 L 260 100 L 260 140 L 300 140 L 300 70 L 350 70 L 350 130 L 390 130 L 390 110 L 440 110 L 440 200 Z" fill={weather === 'rainy' ? '#263238' : '#455A64'} opacity="0.8" />
-                            {/* Road / Ground */}
-                            <rect x="0" y="180" width="100%" height="20" fill={weather === 'rainy' ? '#1c2226' : '#263238'} />
-                        </svg>
+                /* CLOUDY / RAINY - City World */
+                <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '100%' }}>
+                    {/* Building Silhouettes */}
+                    <svg width="100%" height="400" style={{ position: 'absolute', bottom: '40px' }} preserveAspectRatio="none">
+                        <rect x="5%" y="200" width="120" height="200" fill={cityColor} rx="5" />
+                        <rect x="25%" y="100" width="80" height="300" fill={cityColor} rx="2" />
+                        <rect x="27%" y="120" width="60" height="10" fill="#FFF" opacity="0.1" />
+                        <rect x="75%" y="180" width="150" height="220" fill={cityColor} rx="5" />
+                    </svg>
 
-                        {weather === 'rainy' && (
-                            <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
-                                <line x1="10%" y1="-20" x2="5%" y2="300" stroke="#fff" strokeWidth="1" opacity="0.2" className="animate-drop" />
-                                <line x1="30%" y1="-50" x2="25%" y2="300" stroke="#fff" strokeWidth="1" opacity="0.3" className="animate-drop" style={{ animationDelay: '0.2s' }} />
-                                <line x1="50%" y1="-10" x2="45%" y2="300" stroke="#fff" strokeWidth="1.5" opacity="0.2" className="animate-drop" style={{ animationDelay: '0.7s' }} />
-                                <line x1="70%" y1="-40" x2="65%" y2="300" stroke="#fff" strokeWidth="1" opacity="0.3" className="animate-drop" style={{ animationDelay: '0.4s' }} />
-                                <line x1="90%" y1="-15" x2="85%" y2="300" stroke="#fff" strokeWidth="1" opacity="0.2" className="animate-drop" style={{ animationDelay: '0.9s' }} />
-                            </svg>
-                        )}
-                    </div>
-                </>
+                    {/* Ground */}
+                    <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '40px', backgroundColor: '#263238' }} />
+
+                    {/* Rain drops */}
+                    {weather === 'rainy' && (
+                        <svg width="100%" height="100%" style={{ position: 'absolute', top: 0 }}>
+                            {[...Array(30)].map((_, i) => (
+                                <rect
+                                    key={i}
+                                    x={`${(i * 7) % 100}%`}
+                                    y="-20"
+                                    width="1.5"
+                                    height="20"
+                                    fill="#FFF"
+                                    opacity="0.2"
+                                    className="animate-drop"
+                                    style={{ animationDelay: `${(i * 0.1) % 2}s` }}
+                                />
+                            ))}
+                        </svg>
+                    )}
+                </div>
             )}
+
+            {/* 3. SOFT PIXAR CLOUDS (High Layer) */}
+            <div style={{ position: 'absolute', top: '20px', width: '100%', height: '250px' }}>
+                <svg width="100%" height="100%">
+                    <g filter="url(#softBlur)" opacity={weather === 'sunny' ? 0.3 : 0.6}>
+                        {/* Cloud 1 - Group of soft circles */}
+                        <g transform="translate(100, 50)" className="animate-float">
+                            <circle cx="40" cy="40" r="40" fill="url(#cloudGrad)" />
+                            <circle cx="80" cy="40" r="50" fill="url(#cloudGrad)" />
+                            <circle cx="130" cy="50" r="40" fill="url(#cloudGrad)" />
+                        </g>
+
+                        {/* Cloud 2 */}
+                        <g transform="translate(650, 80) scale(1.2)" className="animate-float" style={{ animationDelay: '2s' }}>
+                            <circle cx="40" cy="40" r="35" fill="url(#cloudGrad)" />
+                            <circle cx="70" cy="30" r="45" fill="url(#cloudGrad)" />
+                            <circle cx="110" cy="40" r="35" fill="url(#cloudGrad)" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
         </div>
     );
 };

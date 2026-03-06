@@ -129,13 +129,6 @@ function App() {
         🛠️ DEV
       </button>
 
-      {/* Sun/Moon/Extra ambiance behind the character */}
-      {(weather === 'sunny' || weather === 'partly-cloudy') && (
-        <div style={{ position: 'absolute', top: '10%', left: '20%', zIndex: 5, filter: 'blur(20px)', opacity: 0.8 }}>
-          <div style={{ width: '200px', height: '200px', borderRadius: '50%', backgroundColor: 'var(--color-sun-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="animate-pulse">
-          </div>
-        </div>
-      )}
 
       <main className="main-content">
         {/* Header Section */}
