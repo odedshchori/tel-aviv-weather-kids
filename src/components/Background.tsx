@@ -10,7 +10,6 @@ export const Background: FC<BackgroundProps> = ({ weather }) => {
 
     // Color Palette based on weather
     const cityColor = weather === 'rainy' ? '#37474F' : '#607D8B';
-    const cityColorLight = weather === 'rainy' ? '#546E7A' : '#90A4AE';
 
     return (
         <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100vw', height: '100%', overflow: 'hidden', zIndex: 0, pointerEvents: 'none' }}>

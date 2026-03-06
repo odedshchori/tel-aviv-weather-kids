@@ -17,7 +17,6 @@ function App() {
   const [selectedDayId, setSelectedDayId] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [showShowcase, setShowShowcase] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
 
   const variants = useMemo(() => {
     const list: CharacterVariant[] = ['elephant', 'giraffe', 'meerkat', 'flamingo'];
@@ -156,7 +155,7 @@ function App() {
 
 
           <div>
-            <Character weather={weather} animationKey={animationKey} variant={variant} />
+            <Character weather={weather} variant={variant} />
           </div>
 
         </div>
@@ -185,9 +184,6 @@ function App() {
             isActive={selectedDayId === data.id}
             onClick={() => {
               setSelectedDayId(data.id);
-              if (data.weather === 'sunny' || data.weather === 'partly-cloudy') {
-                setAnimationKey(prev => prev + 1);
-              }
             }}
           />
         ))}

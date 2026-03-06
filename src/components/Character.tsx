@@ -28,11 +28,10 @@ export type CharacterVariant = 'elephant' | 'giraffe' | 'meerkat' | 'flamingo';
 interface CharacterProps {
     weather: WeatherType;
     className?: string;
-    animationKey?: number;
     variant?: CharacterVariant;
 }
 
-export const Character: FC<CharacterProps> = ({ weather, className = '', animationKey = 0, variant = 'elephant' }) => {
+export const Character: FC<CharacterProps> = ({ weather, className = '', variant = 'elephant' }) => {
     const [processedImg, setProcessedImg] = useState<string | null>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
