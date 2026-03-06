@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import './App.css';
-import { WeatherIcon, type WeatherType } from './components/WeatherIcon';
+import { type WeatherType } from './components/WeatherIcon';
 import { Character, type CharacterVariant } from './components/Character';
 import { ForecastCard, type DailyForecast } from './components/ForecastCard';
 import { Background } from './components/Background';
@@ -147,7 +147,6 @@ function App() {
         <div className="hero-container">
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <WeatherIcon type={weather} size={150} animate={true} />
             <div className="hero-temp-display">
               {displayTemp}°
             </div>
